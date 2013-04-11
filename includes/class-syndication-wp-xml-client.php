@@ -372,7 +372,8 @@ class Syndication_WP_XML_Client implements Syndication_Client {
 		}
 		unset( $node_config['categories'] );
 
-		$custom_nodes = $node_config['nodes'];
+        if ( isset( $node_config['nodes'] ) )
+		    $custom_nodes = $node_config['nodes'];
 
 		?>
 		<p>
