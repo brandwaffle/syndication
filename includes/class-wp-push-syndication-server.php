@@ -1195,8 +1195,9 @@ class WP_Push_Syndication_Server {
 			wp_clear_scheduled_hook( 'syn_pull_content' );
 		}
 
+		// @TODO Reset time to time() - 1 after testing
 		wp_schedule_event(
-			time() - 1,
+			time() + 10,
 			'syn_pull_time_interval',
 			'syn_pull_content',
 			array()
@@ -1229,7 +1230,7 @@ class WP_Push_Syndication_Server {
 		return ( $site_a_pull_date < $site_b_pull_date ) ? -1 : 1;
 	}
 
-	public function pull_content( $sites ) {
+	public function pull_content( $sites = array() ) {
 		add_filter( 'http_headers_useragent', array( $this, 'syndication_user_agent' ) );
 	
 		if ( empty( $sites ) )
